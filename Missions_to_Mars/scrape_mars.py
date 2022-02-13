@@ -17,9 +17,9 @@ def init_browser():
     executable_path = {'executable_path': 'chromedriver'}
     browser = Browser('Chrome', **executable_path, headless=False)
 
-def scrape():
+def scrape_data():
     browser=init_browser()
-    mars_dict={}
+    mars_data={}
 
     ###  NASA Mars News   
     url = 'https://redplanetscience.com/'
@@ -101,7 +101,7 @@ def scrape():
             hemisphere_image_urls.append({"title":title, 'img_url': img_url3 })
         
 
-    mars_dict={
+    mars_data={
             "news_title":news_title,
             "news_p":news_p,
             "featured_image_url":featured_image_url,
@@ -113,5 +113,5 @@ def scrape():
 
     browser.quit()
 
-    return mars_dict
+    return mars_data
    
