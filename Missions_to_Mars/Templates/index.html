@@ -13,19 +13,52 @@
  </head>
 
     <div class="container-fluid">
-        <div class="jumbotron text-center">
-            <h1>Mission to Mars</h1>
-            <a class="title_btn btn-primary btn-lg" href="../scrape" role="button">Scrape New Data</a>
+        <div class="jumbotron text-center border-bottom">
+            <h1 class="font-weight-bold">Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-md" href="../scrape" role="button">Scrape New Data</a></p>
         </div>
     </div>
 
     <div class="container">
-        <h2>Latest Mars News</h2>
-        <h4>{{mars_data.news_title[0]}}</h4>
-        <p>{{mars_data.news_p[0]}}</p>
-    </div>
-  
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Latest Mars News</h2>
+            </div>
+           
+        </div>
 
+        <div class="row"></div>
+            <div class="col-md-12">
+                <h4>{{mars_data.news_title}}</h4>
+                <p>{{mars_data.news_p}}</p>
+        </div>
+    </div>   
+
+
+    <div class = "container">
+        <div class="row">
+            <div class="col-md-8 border">
+                <h4>Featured Mars Image </h4>
+                <img class="col-md-12 border" src="{{mars.featured_image_url}}" alt="Features Mars Image">
+                
+
+            </div>
+
+         <div class="col-sm">
+            <h4>Mars Facts </h4>
+            <row> {{mars_data.html_table}}</row>
+         </div>
+        </div>
+    </div>
+
+    <div class = "container">
+        <div class="row" id="hemisheres">
+            <div class="col-md-12">
+            <h4>Mars Hemisheres</h4>
+             {{mars_data.hemisphere_image_urls}}
+            </div>
+        </div>
+    </div>
  <body>
 
 
