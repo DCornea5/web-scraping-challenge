@@ -9,33 +9,39 @@ from pprint import pprint
 from webdriver_manager.chrome import ChromeDriverManager
 from flask import Flask, render_template, redirect
 from flask_pymongo import PyMongo
-
 from selenium import webdriver
 
 
 def init_browser():
-    executable_path = {'executable_path': 'chromedriver'}
-    browser = Browser('Chrome', **executable_path, headless=False)
+    #executable_path = {'executable_path': 'chromedriver'}
+    #browser = Browser('Chrome', **executable_path, headless=False)
 
-def scrape_data():
+    executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
+    return Browser('chrome', **executable_path, headless=False)
+
+
+
+def scrape():
     browser=init_browser()
-    mars_data={}
+    #mars_data={}
 
     ###  NASA Mars News   
-    url = 'https://redplanetscience.com/'
-    browser.visit(url)
-    html=browser.html
-    soup=soup(html,'html.parser')
+    news_url = 'https://redplanetscience.com/'
+    browser.visit(news_url)
+    time.sleep(4)
+    news_html=browser.html
+    soup=soup(news_html,'html.parser')
 
     ### Latest News
 
-    news_title = soup.find_all('div', class_="content_title")[0].text
-    news_p =soup.find_all('div', class_="article_teaser_body")[0].text
+    news_title = soup.find('div', class_="content_title").text
+    news_p =soup.find('div', class_="article_teaser_body").text
     
     ### JPL Mars Space Images - Featured Image
 
     url_img = 'https://spaceimages-mars.com/'
     browser.visit(url_img)
+    time.sleep(4)
     html = browser.html
     soup = soup(html, "html.parser")
     relative_image_url = soup.find_all('img', class_='headerimage')
@@ -101,17 +107,19 @@ def scrape_data():
             hemisphere_image_urls.append({"title":title, 'img_url': img_url3 })
         
 
-    mars_data={
-            "news_title":news_title,
-            "news_p":news_p,
-            "featured_image_url":featured_image_url,
-            "fact_table":mars_fact_table,
-            "hemisphere_images":hemisphere_image_urls
-        }
+    mars_info = {
+        "mars_news": {
+            "news_title": news_title,
+            "news_p": news_p,
+            },
+        "mars_img": featured_image_url,
+        "mars_fact": mars_fact,
+        "mars_hemisphere": hemisphere_image_urls
+    }
 
     # close browser
 
     browser.quit()
 
-    return mars_data
+    return mars_info
    
