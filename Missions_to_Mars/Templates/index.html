@@ -4,8 +4,7 @@
  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mission to Mars</title>
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,54 +14,69 @@
 
  <body>
  
-    <div class="container-fluid">
-        <div class="jumbotron text-center border-bottom">
-            <h1 class="font-weight-bold">Mission to Mars</h1>
-            <p><a class="btn btn-primary btn-md" href="/scrape" role="button">Scrape New Data</a></p>
-        </div>
+  
+
+    <div class="container-md text-center border">
+        <h1 class="font-weight-bold">Mission to Mars</h1>
+        <p><a class="btn btn-primary btn-md" href="/scrape" role="button">Scrape New Data</a></p>
     </div>
+
+ 
 
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2>Latest Mars News</h2>
+                <h3>Latest Mars News</h3>
             </div>
            
         </div>
 
         <div class="row"></div>
             <div class="col-md-12">
-                <h4>{{mars_data.mars_news.news_title}}</h4>
-                <p>{{mars_data.mars_news.news_p}}</p>
+                <h4>{{mars.news_title}}</h4>
+                
+                <p>{{mars.news_p}}</p>
+            </div>
         </div>
     </div>   
 
-
+<!-- Mars Featured Image -->
     <div class = "container">
         <div class="row">
-            <div class="col-md-8 border">
-                <h4>Featured Mars Image </h4>
-                <img class="col-md-12 border" src="{{mars.featured_image_url}}" alt="Features Mars Image">
+            <div class="col-md-8">
+              
+                <h3>Featured Mars Image </h3>
+                <img class="img-responsive" src="{{mars.featured_image_url}}" alt="Features Mars Image">
                 
-
             </div>
-
-         <div class="col-sm">
-            <h4>Mars Facts </h4>
-            <row> {{mars_data.html_table}}</row>
-         </div>
-        </div>
-    </div>
-
-    <div class = "container">
-        <div class="row" id="hemisheres">
-            <div class="col-md-12">
-            <h4>Mars Hemisheres</h4>
-             {{mars_data.hemisphere_image_urls}}
+        
+<!-- Mars Facts -->
+            <div class="col-sm">
+                <div class="row" id="mars-facts">    
+                <h3>Mars Facts </h3>
+                {{mars.mars_facts|safe}}
             </div>
         </div>
     </div>
- 
+
+    <!-- Mars Hemisheres -->
+    <div class="row" id="hemishere">
+        <div class="col-md-12">
+            <h3>Mars Hemisheres</h3>
+            {% for x in mars.hemisphere_image_urls %}
+                <div class="col-md-3">
+                    <div class="img-circle">
+                        <img src="{{x.img_url}}">
+                        <h2><b>{{x.title}}</b></h2> 
+                         
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+       
+    </div>
+
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
