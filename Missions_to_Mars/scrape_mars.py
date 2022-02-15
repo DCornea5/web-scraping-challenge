@@ -200,7 +200,7 @@ def scrape():
     
 
 
-    mars_data_1 = {
+    mars_data = {
         "news_title":news_title,
         "news_p":news_p,
         "featured_image_url":featured_image_url,
@@ -214,7 +214,7 @@ def scrape():
     #mars_scrape_dict["Mars_Facts"] = html_table
     #mars_scrape_dict["Mars_Hemispheres"] = hemisphere_image_urls
     browser.quit()
-    return mars_data_1
+    return mars_data
 
 
 
