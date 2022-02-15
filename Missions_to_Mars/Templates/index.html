@@ -50,11 +50,16 @@
                 
             </div>
         
+
+            
+
 <!-- Mars Facts -->
             <div class="col-sm">
                 <div class="row" id="mars-facts">    
                 <h3>Mars Facts </h3>
-                {{mars.mars_facts|safe}}
+                {{mars_facts}}
+                {{mars.mars_facts}}
+
             </div>
         </div>
     </div>
@@ -67,7 +72,7 @@
                 <div class="col-md-3">
                     <div class="img-circle">
                         <img src="{{x.img_url}}">
-                        <h2><b>{{x.title}}</b></h2> 
+                        <!-- <h2><b>{{x.title}}</b></h2>  -->
                          
                     </div>
                 </div>

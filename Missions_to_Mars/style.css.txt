@@ -1,0 +1,5 @@
+.container-md {
+  background-image: url("../images/mission_to_mars.png");
+  opacity: 0.5;
+}
+

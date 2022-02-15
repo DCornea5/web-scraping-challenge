@@ -22,7 +22,7 @@ def scrape():
     # Setup splinter and open the website
 
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=True)
+    browser = Browser('chrome', **executable_path, headless=False)
     #browser = Browser('chrome', **executable_path, headless=False)
     print("############## Mars Title ##################")
     news_url = 'https://redplanetscience.com/'
@@ -51,7 +51,7 @@ def scrape():
 
 
     # close browser
-    browser.quit()
+    #browser.quit()
 
 
     # ### JPL Mars Space Images - Featured Image
@@ -68,8 +68,8 @@ def scrape():
 
     # Setup splinter 
 
-    executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=False)
+    # executable_path = {'executable_path': ChromeDriverManager().install()}
+    # browser = Browser('chrome', **executable_path, headless=False)
 
     url_img = 'https://spaceimages-mars.com/'
     browser.visit(url_img)
@@ -93,7 +93,7 @@ def scrape():
 
 
     # close browser
-    browser.quit()
+    #browser.quit()
 
 
     # ### Mars Facts
@@ -106,10 +106,15 @@ def scrape():
   
     table_facts = pd.read_html(url_facts)
     df_facts = table_facts[1]
-    df_facts.columns =[" Description", " Value"] 
-    df_facts = df_facts.set_index("Description")
-    mars_facts = df_facts.to_html()
 
+
+    
+    df_facts.columns =["Description", "Value"] 
+    df_facts = df_facts.set_index("Description")
+    
+    mars_facts = df_facts.to_html()
+    
+   
     # mars_facts = pd.read_html(url_facts)[1]
     # mars_facts.reset_index(inplace=True)
     # mars_facts.columns=['Description', 'Value']
@@ -134,17 +139,17 @@ def scrape():
  
    # from bs4 import BeautifulSoup as soup
     print("############# Mars Hemisheres ##############")
-    executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser("chrome", **executable_path, headless=False)
+    # executable_path = {'executable_path': ChromeDriverManager().install()}
+    # browser = Browser("chrome", **executable_path, headless=False)
     url_hemisph = 'https://marshemispheres.com/'
     browser.visit(url_hemisph)
 
     h_html = browser.html
     h_soup = bs(h_html, "html.parser")
-
+   
     h_items = h_soup.find_all('div', class_='item')
-
-    #h_img_cls[0]
+        
+    # h_img_cls[0]
 
     
     
@@ -171,51 +176,57 @@ def scrape():
         
         h_link = h.find('a')
         h_href = h_link['href']
-        title = h_link.find('h3').text
+        
+        
+
+        
 
         browser.visit(url_hemisph + h_href)
 
         image_html = browser.html
-
+        print(image_html)
         image_soup = bs(image_html, 'html.parser')
+        h_img = image_soup.find('img', class_='wide-image')
 
-        download = image_soup.find('div', class_= 'downloads')
-        img_url = download.find('a')['href']
+        #download = image_soup.find('div', class_= 'downloads')
+        img_url = url_hemisph + h_href
         
-        print(title)
-        print(img_url)
-
+        #print(title)
+        
+        
         hemisphere['img_url'] = img_url
-        hemisphere['title'] = title
+        # hemisphere['img']=h_img
+        #hemisphere['title'] = title
         hemisphere_image_urls.append(hemisphere)
+
         
         return hemisphere_image_urls
 
         
-        # hemisphere_image_urls = [{'title': 'Cerberus Hemisphere',
-        # 'img_url': 'https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg'},
-        # {'title': 'Schiaparelli Hemisphere',
-        # 'img_url': 'https://marshemispheres.com/images/3778f7b43bbbc89d6e3cfabb3613ba93_schiaparelli_enhanced.tif_full.jpg'},
-        # {'title': 'Syrtis Major Hemisphere',
-        # 'img_url': 'https://marshemispheres.com/images/555e6403a6ddd7ba16ddb0e471cadcf7_syrtis_major_enhanced.tif_full.jpg'},
-        # {'title': 'Valles Marineris Hemisphere',
-        # 'img_url': 'https://marshemispheres.com/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg'}]
+    # hemisphere_image_urls = [{'title': 'Cerberus Hemisphere',
+    # 'img_url': 'https://marshemispheres.com/images/f5e372a36edfa389625da6d0cc25d905_cerberus_enhanced.tif_full.jpg'},
+    # {'title': 'Schiaparelli Hemisphere',
+    # 'img_url': 'https://marshemispheres.com/images/3778f7b43bbbc89d6e3cfabb3613ba93_schiaparelli_enhanced.tif_full.jpg'},
+    # {'title': 'Syrtis Major Hemisphere',
+    # 'img_url': 'https://marshemispheres.com/images/555e6403a6ddd7ba16ddb0e471cadcf7_syrtis_major_enhanced.tif_full.jpg'},
+    # {'title': 'Valles Marineris Hemisphere',
+    # 'img_url': 'https://marshemispheres.com/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg'}]
     
 
     print("############ Mars Dictionary ##################")
-    mars_info = {
-        "news_title":news_title,
-        "news_p":news_p,
-        "featured_image_url":featured_image_url,
-        "fact_table":mars_facts,
-        "hemisphere_images":hemisphere_image_urls
-    }
-
-    #mars_scrape_dict={"Latest_News_Title"] = news_title
-    #mars_scrape_dict["Latest_News_Paragraph"] = news_p
-    #mars_scrape_dict["Featured_Image"] = featured_image_url
-    #mars_scrape_dict["Mars_Facts"] = html_table
-    #mars_scrape_dict["Mars_Hemispheres"] = hemisphere_image_urls
+    # mars_info = {
+    #     "news_title":news_title,
+    #     "news_p":news_p,
+    #     "featured_image_url":featured_image_url,
+    #     "fact_table":mars_facts,
+    #     "hemisphere_images":hemisphere_image_urls 
+    # }
+    mars_info={}
+    mars_info["Latest_News_Title"] = news_title
+    mars_info["Latest_News_Paragraph"] = news_p
+    mars_info["Featured_Image"] = featured_image_url
+    mars_info["Mars_Facts"] = mars_facts
+    mars_info["Mars_Hemispheres"] = hemisphere_image_urls
     browser.quit()
     return mars_info
 
