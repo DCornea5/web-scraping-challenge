@@ -24,7 +24,7 @@ def scrape():
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=True)
     #browser = Browser('chrome', **executable_path, headless=False)
-
+    print("############## Mars Title ##################")
     news_url = 'https://redplanetscience.com/'
     browser.visit(news_url)
 
@@ -41,10 +41,13 @@ def scrape():
 
     news_title = news_soup.find('div', class_="content_title").text
     news_title
+    print(news_title)
 
+    print("############### Mars Paragraph ##############")
 
     news_p =news_soup.find('div', class_="article_teaser_body").text
     news_p
+    print(news_p)
 
 
     # close browser
@@ -58,7 +61,7 @@ def scrape():
     # * Use splinter to navigate the site and find the image url for the current Featured Mars Image and assign the url string to a variable called `featured_image_url`.
     # 
     # 
-
+    print("############ Mars Image ##############")
 
     #from bs4 import BeautifulSoup as bs
 
@@ -97,7 +100,7 @@ def scrape():
     # * Visit the Mars Facts webpage [here](https://galaxyfacts-mars.com) and use Pandas to scrape the table containing facts about the planet including Diameter, Mass, etc.
     # 
     # * Use Pandas to convert the data to a HTML table string.
-
+    print("########### Mars Facts ##############")
     url_facts = 'https://galaxyfacts-mars.com/'
     browser.visit(url_facts)
   
@@ -130,7 +133,7 @@ def scrape():
     # * Visit the astrogeology site [here](https://marshemispheres.com/) to obtain high resolution images for each of Mar's hemispheres.
  
    # from bs4 import BeautifulSoup as soup
-
+    print("############# Mars Hemisheres ##############")
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser("chrome", **executable_path, headless=False)
     url_hemisph = 'https://marshemispheres.com/'
@@ -199,8 +202,8 @@ def scrape():
         # 'img_url': 'https://marshemispheres.com/images/b3c7c6c9138f57b4756be9b9c43e3a48_valles_marineris_enhanced.tif_full.jpg'}]
     
 
-
-    mars_data = {
+    print("############ Mars Dictionary ##################")
+    mars_info = {
         "news_title":news_title,
         "news_p":news_p,
         "featured_image_url":featured_image_url,
@@ -214,7 +217,7 @@ def scrape():
     #mars_scrape_dict["Mars_Facts"] = html_table
     #mars_scrape_dict["Mars_Hemispheres"] = hemisphere_image_urls
     browser.quit()
-    return mars_data
+    return mars_info
 
 
 
