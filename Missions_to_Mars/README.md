@@ -1,5 +1,5 @@
 
-### Web-scraping-challenge - Web Scraping Homework - Mission to Mars
+web-scraping-challenge - Web Scraping Homework - Mission to Mars
 
 ![mission_to_mars](Images/mission_to_mars.png)  
 
@@ -30,3 +30,4 @@ Store the return value in Mongo as a Python dictionary.
 Create a root route / that will query Mongo database and pass the mars data into an HTML template to display the data.
 
 Create a template HTML file called index.html with Mars data
+

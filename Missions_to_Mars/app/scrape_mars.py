@@ -98,13 +98,13 @@ def mars_facts():
     
     try:
         # scrape the facts table into a dataframe
-        df = pd.read_html('https://galaxyfacts-mars.com')[0]
+        df = pd.read_html('https://galaxyfacts-mars.com')[1]
 
     except BaseException:
         return None
 
     # dataframe columns
-    df.columns = ['Description', 'Mars', 'Earth']
+    df.columns = ['Description', 'Value']
 
     # set index for teh dataframe
     df.set_index('Description', inplace=True)

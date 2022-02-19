@@ -48,7 +48,7 @@
                 <h3>Featured Mars Image </h3>
                 
                 <img src="{{mars.featured_image}}" class="img-responsive" alt="Responsive image"        
-                />
+                /><br><br><br>
 
             </div>
         
@@ -58,34 +58,37 @@
 <!-- Mars Facts -->
             <div class="col-md-4" style="background-color:rgba(238, 161, 131, 0.986)">
                 <div class="row" id="mars-facts">    
-                <h3  >Mars Facts </h3>
-                {{ mars.facts | safe}}
+                    <h3  >Mars Facts </h3>
+                    {{ mars.facts | safe}}<br><br><br>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Mars Hemisheres -->
+    <div class="row" id="mars-hemisheres_t">
+        <div class="col-12 p-3">
+            <h2 text-align: center;>Mars Hemisheres</h2><br><br>
+        </div>
+    </div>
     <div class="row" id="mars-hemisheres">
-        <div class="container">
-            <h3 text-align: center;>Mars Hemisheres</h3>
             {% for x in mars.hemispheres %}
-                <div class="col-sm-3">
-                    <div class="thumbnail">
-                        <img src="{{x.img_url}}" style='width: 150px;' alt="..." >
-                        <div class="caption">
-                            <h4 style="color:rgb(228, 79, 21)">{{x.title}}</h4>
-                        </div>
+            <div class="col-sm-3">
+                <div class="thumbnail">
+                 <img src="{{x.img_url}}" style='width: 150px;' alt="..." >
+                    <div class="caption">
+                    <h4 style="color:rgb(228, 79, 21)">{{x.title}}</h4>
+                    </div>
               
                          
-                    </div>
                 </div>
+            </div>
             {% endfor %}
-        </div>
+    </div>
        
-    </div>
+    
 
-    </div>
+   
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
